@@ -726,9 +726,14 @@
     [self.skipButton setNeedsUpdateConstraints];
     
     
+    [self.backButton removeAllConstraints];
+    [self.nextButton removeAllConstraints];
     [self.backButton addConstaintsToSuperviewWithLeftOffset:24 bottomOffset:-self.navigationButtonsY];
     [self.nextButton addConstaintsToSuperviewWithRightOffset:-24 bottomOffset:-self.navigationButtonsY];
     [self.backButton setHidden:true];
+    [self.nextButton setNeedsUpdateConstraints];
+    [self.backButton setNeedsUpdateConstraints];
+    
 }
 
 #pragma mark - UIScrollView Delegate
@@ -1316,6 +1321,21 @@ CGFloat easeOutValue(CGFloat value) {
                                   attribute: NSLayoutAttributeNotAnAttribute
                                  multiplier: 1
                                    constant: height] setActive:true];
+}
+
+- (void)removeAllConstraints {
+    UIView *superview = self.superview;
+    while (superview != nil) {
+        for (NSLayoutConstraint *c in superview.constraints) {
+            if (c.firstItem == self || c.secondItem == self) {
+                [superview removeConstraint:c];
+            }
+        }
+        superview = superview.superview;
+    }
+    
+    [self removeConstraints:self.constraints];
+    self.translatesAutoresizingMaskIntoConstraints = YES;
 }
 
 @end

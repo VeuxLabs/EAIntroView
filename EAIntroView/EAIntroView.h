@@ -103,4 +103,5 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 -(void)addConstaintsWithWidth:(CGFloat)width height:(CGFloat)height;
 -(void)addConstaintsToSuperviewWithLeftOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
 -(void)addConstaintsToSuperviewWithRightOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
+-(void)removeAllConstraints;
 @end
