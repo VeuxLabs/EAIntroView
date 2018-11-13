@@ -197,12 +197,25 @@
         [self hideWithFadeOutDuration:0.3];
     } else {
         [self scrollToPageForIndex:self.currentPageIndex + 1 animated:YES];
+        [self setupButtonsWithCurrentPage:((int)self.currentPageIndex + 1)];
     }
 }
 
 - (void)scrollToBack {
     if (self.currentPageIndex - 1 >= 0) {
         [self scrollToPageForIndex:self.currentPageIndex - 1 animated:YES];
+        [self setupButtonsWithCurrentPage:((int)self.currentPageIndex - 1)];
+    }
+}
+
+- (void)setupButtonsWithCurrentPage:(int)currentIndex {
+    [self.backButton setHidden:false];
+    [self.nextButton setHidden:false];
+    if (currentIndex<=0){
+        [self.backButton setHidden:true];
+    }
+    if (currentIndex>=([self.pages count]-1)){
+        [self.nextButton setHidden:true];
     }
 }
 
@@ -714,7 +727,7 @@
     
     [self.backButton addConstaintsToSuperviewWithLeftOffset:24 bottomOffset:-12];
     [self.nextButton addConstaintsToSuperviewWithRightOffset:-24 bottomOffset:-12];
-    
+    [self.backButton setHidden:true];
 }
 
 #pragma mark - UIScrollView Delegate
