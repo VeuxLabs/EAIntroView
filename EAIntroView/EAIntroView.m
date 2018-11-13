@@ -743,6 +743,7 @@
     if ([self.delegate respondsToSelector:@selector(intro:pageEndScrolling:withIndex:)] && self.currentPageIndex < [self.pages count]) {
         [self.delegate intro:self pageEndScrolling:_pages[self.currentPageIndex] withIndex:self.currentPageIndex];
     }
+    [self setupButtonsWithCurrentPage:(int)self.currentPageIndex];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(EARestrictedScrollView *)scrollView {
@@ -1202,6 +1203,7 @@ CGFloat easeOutValue(CGFloat value) {
         [self scrollViewDidScroll:self.scrollView];
         [self scrollViewDidEndScrollingAnimation:self.scrollView];
     }
+    [self setupButtonsWithCurrentPage:(int)newPageIndex];
 }
 
 - (void)handleBackgroundTap:(UIGestureRecognizer *)tapRecognizer {
