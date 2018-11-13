@@ -63,6 +63,8 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 
 // Page Control (Y position - from bottom of the screen)
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIButton *nextButton;
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, assign) CGFloat pageControlY;
 
 @property (nonatomic, assign, readonly) NSUInteger currentPageIndex;
@@ -94,4 +96,10 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 
 - (void)scrollToPageForIndex:(NSUInteger)newPageIndex animated:(BOOL)animated;
 
+@end
+
+@interface UIView (Constraints)
+-(void)addConstaintsWithWidth:(CGFloat)width height:(CGFloat)height;
+-(void)addConstaintsToSuperviewWithLeftOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
+-(void)addConstaintsToSuperviewWithRightOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
 @end
