@@ -72,6 +72,7 @@
     _scrollingEnabled = YES;
     _titleViewY = 20.f;
     _pageControlY = 70.f;
+    _navigationButtonsY = 12.f;
     _skipButtonY = EA_EMPTY_PROPERTY;
     _skipButtonSideMargin = 10.f;
     _skipButtonAlignment = EAViewAlignmentRight;
@@ -725,8 +726,8 @@
     [self.skipButton setNeedsUpdateConstraints];
     
     
-    [self.backButton addConstaintsToSuperviewWithLeftOffset:24 bottomOffset:-12];
-    [self.nextButton addConstaintsToSuperviewWithRightOffset:-24 bottomOffset:-12];
+    [self.backButton addConstaintsToSuperviewWithLeftOffset:24 bottomOffset:-self.navigationButtonsY];
+    [self.nextButton addConstaintsToSuperviewWithRightOffset:-24 bottomOffset:-self.navigationButtonsY];
     [self.backButton setHidden:true];
 }
 
@@ -985,6 +986,14 @@ CGFloat easeOutValue(CGFloat value) {
 
 - (void)setPageControlY:(CGFloat)pageControlY {
     _pageControlY = pageControlY;
+    
+    [self buildFooterView];
+    
+    [self setNeedsDisplay];
+}
+
+- (void)setNavigationButtonsY:(CGFloat)navigationButtonsY {
+    _navigationButtonsY = navigationButtonsY;
     
     [self buildFooterView];
     
