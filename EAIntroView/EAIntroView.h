@@ -66,6 +66,7 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 @property (nonatomic, strong) UIButton *nextButton;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, assign) CGFloat pageControlY;
+@property (nonatomic, assign) CGFloat navigationButtonsY;
 
 @property (nonatomic, assign, readonly) NSUInteger currentPageIndex;
 @property (nonatomic, assign, readonly) NSUInteger visiblePageIndex;
