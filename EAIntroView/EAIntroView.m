@@ -551,7 +551,7 @@
 
 - (void)addTapToNextActionToPageView:(UIView *)pageView {
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundTap:)];
-    
+    tapRecognizer.delegate = self;
     [pageView addGestureRecognizer:tapRecognizer];
 }
 
@@ -1336,6 +1336,17 @@ CGFloat easeOutValue(CGFloat value) {
     
     [self removeConstraints:self.constraints];
     self.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
+
+// UIGestureRecognizerDelegate methods
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    // Disallow recognition of tap gestures in the segmented control.
+    if ([touch.view isKindOfClass:[UIControl class]]) {//change it to your condition
+        return NO;
+    }
+    return YES;
 }
 
 @end
