@@ -211,12 +211,8 @@
 
 - (void)setupButtonsWithCurrentPage:(int)currentIndex {
     [self.backButton setHidden:false];
-    [self.nextButton setHidden:false];
     if (currentIndex<=0){
         [self.backButton setHidden:true];
-    }
-    if (currentIndex>=([self.pages count]-1)){
-        [self.nextButton setHidden:true];
     }
 }
 
@@ -308,6 +304,7 @@
         _nextButton = [[UIButton alloc] init];
         [_nextButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
         [self applyDefaultsToNextButton];
+        _nextButton.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16);
     }
     return _nextButton;
 }
@@ -317,6 +314,7 @@
         _backButton = [[UIButton alloc] init];
         [_backButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
         [self applyDefaultsToBackButton];
+        _backButton.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16);
     }
     return _backButton;
 }
