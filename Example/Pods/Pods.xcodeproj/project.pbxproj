@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		342FD0CF5A19992200CDCD679F2D71C6 /* EAIntroView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E39B0685549CF2D162E351710F817C7 /* EAIntroView-dummy.m */; };
 		35843D6B720611CD4E0BB4372C6E521A /* EAIntroPage.h in Headers */ = {isa = PBXBuildFile; fileRef = CD6CC02EF85953C2726E73AA3634DD48 /* EAIntroPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4925AE9F21A7B7720065E6DD /* ZFProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925AE9D21A7B7710065E6DD /* ZFProgressBar.m */; };
-		4925AEA021A7B7720065E6DD /* ZFProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4925AE9E21A7B7720065E6DD /* ZFProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4925AEA521A7BED00065E6DD /* ZFProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925AEA321A7BED00065E6DD /* ZFProgressBar.m */; };
+		4925AEA621A7BED00065E6DD /* ZFProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4925AEA421A7BED00065E6DD /* ZFProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49A40958B574F4AA0622B86E3DAA19F5 /* EARestrictedScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 15AC623A9DDD2B959378E7A335C59F38 /* EARestrictedScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EA4A852D1D8C36A63ED5E157029EC06 /* EAIntroView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7F426B35562899C73D38F2E445EE9FE /* EAIntroView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		501396162015F7B2D3D6629BFB27F7C9 /* EAIntroView.h in Headers */ = {isa = PBXBuildFile; fileRef = 230BEDC7FF458C314B581C4F001CD8AF /* EAIntroView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,8 +80,8 @@
 		429256DA0BDD735552A2A1EF312BB3E6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44E3B210C9336065045EDC5EDBC2C158 /* EAIntroView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EAIntroView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4744BD187D6D8C967FC3EDBE106083E8 /* EAIntroView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EAIntroView.m; path = EAIntroView/EAIntroView.m; sourceTree = "<group>"; };
-		4925AE9D21A7B7710065E6DD /* ZFProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFProgressBar.m; path = EAIntroView/ZFProgressBar.m; sourceTree = "<group>"; };
-		4925AE9E21A7B7720065E6DD /* ZFProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFProgressBar.h; path = EAIntroView/ZFProgressBar.h; sourceTree = "<group>"; };
+		4925AEA321A7BED00065E6DD /* ZFProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZFProgressBar.m; path = EAIntroView/ZFProgressBar.m; sourceTree = "<group>"; };
+		4925AEA421A7BED00065E6DD /* ZFProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFProgressBar.h; path = EAIntroView/ZFProgressBar.h; sourceTree = "<group>"; };
 		4A39C0EF9D01DEA5FEA591192B86A274 /* EARestrictedScrollView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EARestrictedScrollView-umbrella.h"; sourceTree = "<group>"; };
 		5099A313D821601FD3E5D581EF6E2D72 /* Pods-EAIntroView-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EAIntroView-acknowledgements.markdown"; sourceTree = "<group>"; };
 		539BA950445062ED1C73617EEEB74AB5 /* SMPageControl-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SMPageControl-dummy.m"; sourceTree = "<group>"; };
@@ -288,8 +288,8 @@
 		AFC54FEC717FE071E3E521E82D47EFE7 /* EAIntroView */ = {
 			isa = PBXGroup;
 			children = (
-				4925AE9E21A7B7720065E6DD /* ZFProgressBar.h */,
-				4925AE9D21A7B7710065E6DD /* ZFProgressBar.m */,
+				4925AEA421A7BED00065E6DD /* ZFProgressBar.h */,
+				4925AEA321A7BED00065E6DD /* ZFProgressBar.m */,
 				CD6CC02EF85953C2726E73AA3634DD48 /* EAIntroPage.h */,
 				164EB3EEEA88363B064BC6ADE85ECC28 /* EAIntroPage.m */,
 				230BEDC7FF458C314B581C4F001CD8AF /* EAIntroView.h */,
@@ -335,7 +335,7 @@
 				35843D6B720611CD4E0BB4372C6E521A /* EAIntroPage.h in Headers */,
 				4EA4A852D1D8C36A63ED5E157029EC06 /* EAIntroView-umbrella.h in Headers */,
 				501396162015F7B2D3D6629BFB27F7C9 /* EAIntroView.h in Headers */,
-				4925AEA021A7B7720065E6DD /* ZFProgressBar.h in Headers */,
+				4925AEA621A7BED00065E6DD /* ZFProgressBar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4925AE9F21A7B7720065E6DD /* ZFProgressBar.m in Sources */,
+				4925AEA521A7BED00065E6DD /* ZFProgressBar.m in Sources */,
 				C41EB9232CC9C9A7A1D5A6F221D1EDB4 /* EAIntroPage.m in Sources */,
 				342FD0CF5A19992200CDCD679F2D71C6 /* EAIntroView-dummy.m in Sources */,
 				EA705D6826863CE9297E92D5673EEDCE /* EAIntroView.m in Sources */,
