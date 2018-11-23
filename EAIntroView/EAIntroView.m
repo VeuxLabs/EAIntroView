@@ -151,9 +151,8 @@
     
     [self makePanelVisibleAtIndex:self.currentPageIndex];
     
-    // FIXME:   [self scrollToPageForIndex:self.progressBar.currentPage animated:YES];
     if (_pages.count > 0) {
-        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
     }else {
         self.progressBar.progress = 0.0;
     }
@@ -175,6 +174,11 @@
         }
         
         [self finishIntroductionAndRemoveSelf];
+    }
+    if (_pages.count > 0) {
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
+    }else {
+        self.progressBar.progress = 0.0;
     }
 }
 
@@ -225,7 +229,7 @@
         [self.nextButton setHidden:true];
     }
     if (_pages.count > 0) {
-        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
     }else {
         self.progressBar.progress = 0.0;
     }
@@ -299,12 +303,9 @@
 }
 
 - (void)applyDefaultsToProgressBar {
-    // FIXME:   _progressBar.defersCurrentPageDisplay = YES;
-    // FIXME:    _progressBar.numberOfPages = _pages.count;
     _progressBar.translatesAutoresizingMaskIntoConstraints = NO;
-    // FIXME:    [_progressBar addTarget:self action:@selector(showPanelAtProgressBar) forControlEvents:UIControlEventValueChanged];
     if (_pages.count > 0) {
-        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
     }else {
         self.progressBar.progress = 0.0;
     }
@@ -686,7 +687,7 @@
                               @"skipButtonSideMargin": @(self.skipButtonSideMargin),
                               @"skipButtonWidth": @(skipButtonWidth)};
     
-    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[progressBar]-|"
+    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(80)-[progressBar]-(80)-|"
                                                                                         options:NSLayoutFormatAlignAllCenterX
                                                                                         metrics:metrics
                                                                                           views:views]];
@@ -792,7 +793,7 @@
     
     if (self.visiblePageIndex < _pages.count) {
         if (_pages.count > 0) {
-            self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+            self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
         }else {
             self.progressBar.progress = 0.0;
         }
@@ -934,10 +935,8 @@ CGFloat easeOutValue(CGFloat value) {
     self.scrollView = nil;
     
     _currentPageIndex = 0;
-    // FIXME: self.progressBar.numberOfPages = _pages.count;
-    // FIXME: self.progressBar.currentPage = self.currentPageIndex;
     if (_pages.count > 0) {
-        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
     }else {
         self.progressBar.progress = 0.0;
     }
