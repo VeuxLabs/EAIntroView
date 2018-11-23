@@ -225,9 +225,6 @@
     if (currentIndex<=0){
         [self.backButton setHidden:true];
     }
-    if (currentIndex>=([self.pages count]-1)){
-        [self.nextButton setHidden:true];
-    }
     if (_pages.count > 0) {
         self.progressBar.progress = (self.currentPageIndex * (1.0 / (_pages.count - 1)));
     }else {
