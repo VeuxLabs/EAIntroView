@@ -6,6 +6,7 @@
 #import <UIKit/UIKit.h>
 #import <EARestrictedScrollView/EARestrictedScrollView.h>
 #import "EAIntroPage.h"
+#import "ZFProgressBar.h"
 
 #define EA_EMPTY_PROPERTY 9999.f
 
@@ -42,7 +43,7 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 - (void)intro:(EAIntroView *)introView didScrollWithOffset:(CGFloat)offset;
 @end
 
-@interface EAIntroView : UIView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface EAIntroView : UIView <UIScrollViewDelegate>
 
 @property (nonatomic, weak) id<EAIntroDelegate> delegate;
 
@@ -62,10 +63,10 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 @property (nonatomic, assign) UIViewContentMode bgViewContentMode;
 
 // Page Control (Y position - from bottom of the screen)
-@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) ZFProgressBar *progressBar;
 @property (nonatomic, strong) UIButton *nextButton;
 @property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, assign) CGFloat pageControlY;
+@property (nonatomic, assign) CGFloat progressBarY;
 @property (nonatomic, assign) CGFloat navigationButtonsY;
 
 @property (nonatomic, assign, readonly) NSUInteger currentPageIndex;
@@ -104,4 +105,4 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 -(void)addConstaintsToSuperviewWithLeftOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
 -(void)addConstaintsToSuperviewWithRightOffset:(CGFloat)leftOffset bottomOffset:(CGFloat)bottomOffset;
 -(void)removeAllConstraints;
-@end
+@end 

@@ -61,7 +61,7 @@ static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta no
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:rootView.bounds andPages:@[page1,page2,page3,page4]];
     intro.skipButtonAlignment = EAViewAlignmentCenter;
     intro.skipButtonY = 80.f;
-    intro.pageControlY = 42.f;
+    intro.progressBarY = 42.f;
 
     [intro setDelegate:self];
 
@@ -127,7 +127,7 @@ static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta no
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:rootView.bounds andPages:@[page1,page2,page3,page4]];
     intro.bgImage = [UIImage imageNamed:@"bg2"];
 
-    intro.pageControlY = 250.f;
+    intro.progressBarY = 250.f;
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [btn setFrame:CGRectMake(0, 0, 230, 40)];
@@ -318,8 +318,8 @@ static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta no
     [pageControl sizeToFit];
 
     // This is a hack - not recommended for Swift, more information: https://github.com/ealeksandrov/EAIntroView/issues/161
-    intro.pageControl = (UIPageControl *)pageControl;
-    intro.pageControlY = 130.f;
+//    intro.pageControl = (UIPageControl *)pageControl;
+//    intro.pageControlY = 130.f;
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:[UIImage imageNamed:@"skipButton"] forState:UIControlStateNormal];

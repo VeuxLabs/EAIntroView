@@ -28,7 +28,8 @@
 
 @implementation EAIntroView
 
-@synthesize pageControl = _pageControl;
+
+@synthesize progressBar = _progressBar;
 @synthesize nextButton = _nextButton;
 @synthesize backButton = _backButton;
 @synthesize skipButton = _skipButton;
@@ -71,7 +72,7 @@
     self.backgroundColor = [UIColor blackColor];
     _scrollingEnabled = YES;
     _titleViewY = 20.f;
-    _pageControlY = 70.f;
+    _progressBarY = 70.f;
     _navigationButtonsY = 12.f;
     _skipButtonY = EA_EMPTY_PROPERTY;
     _skipButtonSideMargin = 10.f;
@@ -143,14 +144,19 @@
     return [self pageForIndex:idx].bgColor;
 }
 
-- (void)showPanelAtPageControl {
+- (void)showPanelAtProgressBar {
     if (self.scrollView.tracking || self.scrollView.dragging) {
         return;
     }
     
     [self makePanelVisibleAtIndex:self.currentPageIndex];
     
-    [self scrollToPageForIndex:self.pageControl.currentPage animated:YES];
+    // FIXME:   [self scrollToPageForIndex:self.progressBar.currentPage animated:YES];
+    if (_pages.count > 0) {
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+    }else {
+        self.progressBar.progress = 0.0;
+    }
 }
 
 - (void)checkIndexForScrollView:(EARestrictedScrollView *)scrollView {
@@ -211,8 +217,17 @@
 
 - (void)setupButtonsWithCurrentPage:(int)currentIndex {
     [self.backButton setHidden:false];
+    [self.nextButton setHidden:false];
     if (currentIndex<=0){
         [self.backButton setHidden:true];
+    }
+    if (currentIndex>=([self.pages count]-1)){
+        [self.nextButton setHidden:true];
+    }
+    if (_pages.count > 0) {
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+    }else {
+        self.progressBar.progress = 0.0;
     }
 }
 
@@ -275,19 +290,24 @@
     return _pageBgFront;
 }
 
-- (UIPageControl *)pageControl {
-    if (!_pageControl) {
-        _pageControl = [[UIPageControl alloc] init];
-        [self applyDefaultsToPageControl];
+- (ZFProgressBar *)progressBar {
+    if (!_progressBar) {
+        _progressBar = [[ZFProgressBar alloc] init];
+        [self applyDefaultsToProgressBar];
     }
-    return _pageControl;
+    return _progressBar;
 }
 
-- (void)applyDefaultsToPageControl {
-    _pageControl.defersCurrentPageDisplay = YES;
-    _pageControl.numberOfPages = _pages.count;
-    _pageControl.translatesAutoresizingMaskIntoConstraints = NO;
-    [_pageControl addTarget:self action:@selector(showPanelAtPageControl) forControlEvents:UIControlEventValueChanged];
+- (void)applyDefaultsToProgressBar {
+    // FIXME:   _progressBar.defersCurrentPageDisplay = YES;
+    // FIXME:    _progressBar.numberOfPages = _pages.count;
+    _progressBar.translatesAutoresizingMaskIntoConstraints = NO;
+    // FIXME:    [_progressBar addTarget:self action:@selector(showPanelAtProgressBar) forControlEvents:UIControlEventValueChanged];
+    if (_pages.count > 0) {
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+    }else {
+        self.progressBar.progress = 0.0;
+    }
 }
 
 - (UIButton *)skipButton {
@@ -304,7 +324,6 @@
         _nextButton = [[UIButton alloc] init];
         [_nextButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
         [self applyDefaultsToNextButton];
-        _nextButton.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16);
     }
     return _nextButton;
 }
@@ -314,7 +333,6 @@
         _backButton = [[UIButton alloc] init];
         [_backButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
         [self applyDefaultsToBackButton];
-        _backButton.imageEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16);
     }
     return _backButton;
 }
@@ -549,7 +567,7 @@
 
 - (void)addTapToNextActionToPageView:(UIView *)pageView {
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundTap:)];
-    tapRecognizer.delegate = self;
+    
     [pageView addGestureRecognizer:tapRecognizer];
 }
 
@@ -631,8 +649,8 @@
 }
 
 - (void)buildFooterView {
-    if (!self.pageControl.superview) {
-        [self insertSubview:self.pageControl aboveSubview:self.scrollView];
+    if (!self.progressBar.superview) {
+        [self insertSubview:self.progressBar aboveSubview:self.scrollView];
     }
     
     if (!self.skipButton.superview) {
@@ -647,7 +665,7 @@
         [self insertSubview:self.nextButton aboveSubview:self.scrollView];
     }
     
-    [self.pageControl.superview bringSubviewToFront:self.pageControl];
+    [self.progressBar.superview bringSubviewToFront:self.progressBar];
     [self.skipButton.superview bringSubviewToFront:self.skipButton];
     [self.nextButton.superview bringSubviewToFront:self.nextButton];
     [self.backButton.superview bringSubviewToFront:self.backButton];
@@ -657,22 +675,22 @@
         [self.footerConstraints removeAllObjects];
     }
     
-    CGFloat pageControlHeight = self.pageControl.frame.size.height > 0 ? self.pageControl.frame.size.height: PAGE_CTRL_DEFAULT_HEIGHT;
+    CGFloat progressBarHeight = self.progressBar.frame.size.height > 0 ? self.progressBar.frame.size.height: PAGE_CTRL_DEFAULT_HEIGHT;
     CGFloat skipButtonWidth = self.skipButton.frame.size.width > 0 ? self.skipButton.frame.size.width: SKIP_BTN_DEFAULT_WIDTH;
     CGFloat skipButtonHeight = self.skipButton.frame.size.height > 0 ? self.skipButton.frame.size.height: SKIP_BTN_DEFAULT_HEIGHT;
     
-    NSDictionary *views = @{@"pageControl": self.pageControl, @"skipButton": self.skipButton};
-    NSDictionary *metrics = @{@"pageControlBottomPadding": @(self.pageControlY - pageControlHeight),
-                              @"pageControlHeight": @(pageControlHeight),
+    NSDictionary *views = @{@"progressBar": self.progressBar, @"skipButton": self.skipButton};
+    NSDictionary *metrics = @{@"progressBarBottomPadding": @(self.progressBarY - progressBarHeight),
+                              @"progressBarHeight": @(progressBarHeight),
                               @"skipButtonBottomPadding": @(self.skipButtonY - skipButtonHeight),
                               @"skipButtonSideMargin": @(self.skipButtonSideMargin),
                               @"skipButtonWidth": @(skipButtonWidth)};
     
-    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[pageControl]-|"
+    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[progressBar]-|"
                                                                                         options:NSLayoutFormatAlignAllCenterX
                                                                                         metrics:metrics
                                                                                           views:views]];
-    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[pageControl(pageControlHeight)]-(pageControlBottomPadding@250)-|"
+    [self.footerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[progressBar(progressBarHeight)]-(progressBarBottomPadding@250)-|"
                                                                                         options:NSLayoutFormatAlignAllBottom
                                                                                         metrics:metrics
                                                                                           views:views]];
@@ -703,7 +721,7 @@
         }
         
         if (self.skipButtonY == EA_EMPTY_PROPERTY) {
-            [self.footerConstraints addObject:[NSLayoutConstraint constraintWithItem:self.pageControl
+            [self.footerConstraints addObject:[NSLayoutConstraint constraintWithItem:self.progressBar
                                                                            attribute:NSLayoutAttributeCenterY
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:self.skipButton
@@ -720,7 +738,7 @@
     
     [self addConstraints:self.footerConstraints];
     
-    [self.pageControl setNeedsUpdateConstraints];
+    [self.progressBar setNeedsUpdateConstraints];
     [self.skipButton setNeedsUpdateConstraints];
     
     
@@ -773,8 +791,11 @@
     [self crossDissolveForOffset:offset];
     
     if (self.visiblePageIndex < _pages.count) {
-        self.pageControl.currentPage = self.visiblePageIndex;
-        
+        if (_pages.count > 0) {
+            self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+        }else {
+            self.progressBar.progress = 0.0;
+        }
         [self makePanelVisibleAtIndex:self.visiblePageIndex];
     }
     
@@ -913,8 +934,13 @@ CGFloat easeOutValue(CGFloat value) {
     self.scrollView = nil;
     
     _currentPageIndex = 0;
-    self.pageControl.numberOfPages = _pages.count;
-    self.pageControl.currentPage = self.currentPageIndex;
+    // FIXME: self.progressBar.numberOfPages = _pages.count;
+    // FIXME: self.progressBar.currentPage = self.currentPageIndex;
+    if (_pages.count > 0) {
+        self.progressBar.progress = (self.currentPageIndex * (1.0 / _pages.count));
+    }else {
+        self.progressBar.progress = 0.0;
+    }
     
     [self buildScrollView];
 }
@@ -972,23 +998,23 @@ CGFloat easeOutValue(CGFloat value) {
     [self setNeedsDisplay];
 }
 
-- (void)setPageControl:(UIPageControl *)pageControl {
-    if (!pageControl) {
-        _pageControl.hidden = YES;
+- (void)setProgressBar:(ZFProgressBar *)progressBar {
+    if (!progressBar) {
+        _progressBar.hidden = YES;
         return;
     }
     
-    [_pageControl removeFromSuperview];
-    _pageControl = pageControl;
-    [self applyDefaultsToPageControl];
+    [_progressBar removeFromSuperview];
+    _progressBar = progressBar;
+    [self applyDefaultsToProgressBar];
     
     [self buildFooterView];
     
     [self setNeedsDisplay];
 }
 
-- (void)setPageControlY:(CGFloat)pageControlY {
-    _pageControlY = pageControlY;
+- (void)setProgressBarY:(CGFloat)progressBarY {
+    _progressBarY = progressBarY;
     
     [self buildFooterView];
     
@@ -1334,17 +1360,6 @@ CGFloat easeOutValue(CGFloat value) {
     
     [self removeConstraints:self.constraints];
     self.translatesAutoresizingMaskIntoConstraints = YES;
-}
-
-
-// UIGestureRecognizerDelegate methods
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    // Disallow recognition of tap gestures in the segmented control.
-    if ([touch.view isKindOfClass:[UIControl class]]) {//change it to your condition
-        return NO;
-    }
-    return YES;
 }
 
 @end
