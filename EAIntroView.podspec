@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/ealeksandrov/EAIntroView.git', :tag => s.version.to_s }
   s.source_files = 'EAIntroView/ZFProgressBar.{h,m}', 'EAIntroView/EAIntro{Page,View}.{h,m}'
   s.requires_arc = true
-  s.public_header_files = 'EAIntroView/ZFProgressBar.h', 'EAIntroView/EAIntro{Page,View}.h'
+  s.public_header_files = 'EAIntroView/*.h'
 
   s.dependency 'EARestrictedScrollView', '~> 1.1.0'
 
