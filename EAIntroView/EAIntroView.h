@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, EAViewAlignment) {
 - (void)intro:(EAIntroView *)introView didScrollWithOffset:(CGFloat)offset;
 @end
 
-@interface EAIntroView : UIView <UIScrollViewDelegate>
+@interface EAIntroView : UIView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) id<EAIntroDelegate> delegate;
 
