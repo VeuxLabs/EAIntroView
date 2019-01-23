@@ -158,7 +158,7 @@
 -(void)drawRect:(CGRect)rect{
     
     //// Color Declarations
-    UIColor* barBackgroundColor = [_tintColor colorWithAlphaComponent:0.32];
+    UIColor* barBackgroundColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1.0];
     
     //// Frames
     CGRect progressBarFrame = rect;//CGRectMake(43, 50, 86, 19);
