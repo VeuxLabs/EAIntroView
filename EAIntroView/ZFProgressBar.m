@@ -62,7 +62,6 @@
         progress = 1;
     }
     _progress = progress;
-    NSLog(@"progress : %f",progress);
     //calculate active bar frame
     float fullWidth = self.bounds.size.width - (self.activeBar.bounds.size.height - 5); //min size of active bar
     self.activeBar.frame = CGRectMake(0, 0, (self.activeBar.bounds.size.height - 5) + (fullWidth * _progress), self.activeBar.bounds.size.height);
@@ -161,7 +160,7 @@
     UIColor* barBackgroundColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1.0];
     
     //// Frames
-    CGRect progressBarFrame = rect;//CGRectMake(43, 50, 86, 19);
+    CGRect progressBarFrame = rect;//CGRectMake(43, 50, 86, 19);progress :
     
     //// Progress Canvas Drawing
     UIBezierPath* progressCanvasPath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(CGRectGetMinX(progressBarFrame) + 2, CGRectGetMinY(progressBarFrame) + 4, CGRectGetWidth(progressBarFrame) - 4, 10) cornerRadius: 5];

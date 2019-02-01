@@ -1187,7 +1187,6 @@ CGFloat easeOutValue(CGFloat value) {
 
 - (void)showInView:(UIView *)view animateDuration:(CGFloat)duration withInitialPageIndex:(NSUInteger)initialPageIndex {
     if (![self pageForIndex:initialPageIndex]) {
-        NSLog(@"Wrong initialPageIndex received: %ld",(long)initialPageIndex);
         return;
     }
     
@@ -1227,7 +1226,6 @@ CGFloat easeOutValue(CGFloat value) {
 
 - (void)scrollToPageForIndex:(NSUInteger)newPageIndex animated:(BOOL)animated {
     if (![self pageForIndex:newPageIndex]) {
-        NSLog(@"Wrong newPageIndex received: %ld",(long)newPageIndex);
         return;
     }
     
