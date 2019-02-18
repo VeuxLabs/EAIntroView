@@ -493,7 +493,7 @@
 
 - (void)addTapToNextActionToPageView:(UIView *)pageView {
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBackgroundTap:)];
-
+    tapRecognizer.delegate = self;
     [pageView addGestureRecognizer:tapRecognizer];
 }
 
