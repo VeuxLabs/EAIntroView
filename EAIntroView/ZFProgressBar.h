@@ -8,8 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+
+@interface ZFProgressBarActiveBackground : UIView
+@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *activeBarTintColor;
+@end
+
+@interface ZFProgressBarBackground : UIView
+@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *barBackgroundTintColor;
+@end
+
 @interface ZFProgressBar : UIView
 
 @property (nonatomic) float progress;
 @property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) ZFProgressBarActiveBackground *activeBar;
+@property (nonatomic, strong) ZFProgressBarBackground *barBackground;
+
+
 @end
+
+

@@ -8,18 +8,18 @@
 
 #import "ZFProgressBar.h"
 
-@interface ZFProgressBarActiveBackground : UIView
-@property (nonatomic, strong) UIColor *tintColor;
-@end
-
-@interface ZFProgressBarBackground : UIView
-@property (nonatomic, strong) UIColor *tintColor;
-@end
-
-@interface ZFProgressBar ()
-@property (nonatomic, strong) ZFProgressBarActiveBackground *activeBar;
-@property (nonatomic, strong) ZFProgressBarBackground *barBackground;
-@end
+//@interface ZFProgressBarActiveBackground : UIView
+//@property (nonatomic, strong) UIColor *tintColor;
+//@end
+//
+//@interface ZFProgressBarBackground : UIView
+//@property (nonatomic, strong) UIColor *tintColor;
+//@end
+//
+//@interface ZFProgressBar ()
+//@property (nonatomic, strong) ZFProgressBarActiveBackground *activeBar;
+//@property (nonatomic, strong) ZFProgressBarBackground *barBackground;
+//@end
 
 @implementation ZFProgressBar
 
@@ -48,9 +48,9 @@
 
 -(void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
-    [_barBackground setTintColor:_tintColor];
+    [_barBackground setBackgroundColor:self.barBackground.barBackgroundTintColor];
     [_barBackground setNeedsDisplay];
-    [_activeBar setTintColor:_tintColor];
+    [_activeBar setBackgroundColor:self.activeBar.activeBarTintColor];
     [_activeBar setNeedsDisplay];
 }
 
@@ -157,7 +157,7 @@
 -(void)drawRect:(CGRect)rect{
     
     //// Color Declarations
-    UIColor* barBackgroundColor = [UIColor colorWithRed:205.0/255.0 green:205.0/255.0 blue:205.0/255.0 alpha:1.0];
+    UIColor* barBackgroundColor = self.barBackgroundTintColor;
     
     //// Frames
     CGRect progressBarFrame = rect;//CGRectMake(43, 50, 86, 19);progress :
