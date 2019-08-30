@@ -83,7 +83,7 @@
     if (self) {
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
-        _tintColor = [UIColor colorWithRed: 0.333 green: 0.333 blue: 0.333 alpha: 1];
+        _tintColor = self.activeBarTintColor;
     }
     return self;
 }
@@ -135,6 +135,7 @@
 
 -(void)layoutSubviews{
     [self setNeedsDisplayInRect:self.frame];
+    _tintColor = self.activeBarTintColor;
 }
 
 @end
